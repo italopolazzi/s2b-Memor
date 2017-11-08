@@ -3,10 +3,13 @@ package com.dev.mendes.android_mytasks.activity;
 import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 
 import com.dev.mendes.android_mytasks.adapter.TaskListAdapter;
 import com.dev.mendes.android_mytasks.dataBase.DataBaseControl;
 import com.google.android.gms.maps.model.LatLng;
+
+import java.util.ArrayList;
 /*
 import com.dev.mendes.android_mytasks.activity.MapsActivity;
 import com.google.android.gms.maps.model.LatLng;
@@ -19,30 +22,37 @@ import com.google.android.gms.maps.model.LatLng;
 public class MemorService extends IntentService {
 
     private double valor = 1000 * 1000; //em metros
+    private Cursor sCursor;
+    private DataBaseControl db;
 
     private Context context;
-    TaskListAdapter adapter;
 
     public MemorService(String name, Context context) {
         super(name);
 
         this.context = context;
 
-//        adapter = new ServiceAdapter(context,this);
+        db = new DataBaseControl(context);
+        sCursor = db.loadTasks();
+
+
+
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
-/*
+
         while (temItemNaLista()) {
             synchronized (this) {
 
                 try {
 
-                    self.update();
+                    Self.update();
 
-                    for (item i : Lista) {
-                        if (calculaDistancia(self.getLat(), self.getLng(), i.lat, i.lng) < valor) {
+                    ArrayList<Item> lista = getEach();
+
+                    for (Item i : lista) {
+                        if (calculaDistancia(Self.getLat(), Self.getLng(), i.lat, i.lng) < valor) {
                             postNotificantion(i);
                         }
 
@@ -63,7 +73,7 @@ public class MemorService extends IntentService {
 
             }
         }
-*/
+
     }
 
     private double calculaDistancia(double lat1, double lng1, double lat2, double lng2) {
@@ -91,16 +101,16 @@ public class MemorService extends IntentService {
     }
 
     protected boolean temItemNaLista(Context context) {
-        DataBaseControl db = new DataBaseControl(context);
+        sCursor = db.loadTasks();
 
-        if (true){
+        if (sCursor != null){
             return  true;
         } else {
             return false;
         }
     }
 
-    protected static class self {
+    protected static class Self {
         static LatLng myLocation;
 
         public static void update(){
@@ -115,6 +125,25 @@ public class MemorService extends IntentService {
         public static double getLng() {
             return myLocation.longitude;
         }
+    }
+
+    protected static class Item {
+        int id;
+        double lat,lng;
+        String title, text;
+
+    }
+
+    private ArrayList<Item> getEach() {
+        ArrayList<Item> mArrayList = new ArrayList<>();
+        for(sCursor.moveToFirst(); !sCursor.isAfterLast(); sCursor.moveToNext()) {
+            // The Cursor is now set to the right position
+            Item i = new Item;
+            i.id = sCursor.getColumnIndex("_id");
+            mArrayList.add(i);
+        }
+
+        return mArrayList;
     }
 
 }
