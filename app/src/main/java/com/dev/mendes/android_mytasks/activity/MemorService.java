@@ -4,9 +4,12 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.widget.Toast;
 
+import com.dev.mendes.android_mytasks.R;
 import com.dev.mendes.android_mytasks.adapter.TaskListAdapter;
 import com.dev.mendes.android_mytasks.dataBase.DataBaseControl;
+import com.dev.mendes.android_mytasks.fragment.TaskListFragment;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
@@ -36,42 +39,43 @@ public class MemorService extends IntentService {
         sCursor = db.loadTasks();
 
 
-
     }
 
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        while (temItemNaLista(context)) {
-            synchronized (this) {
+        NotificationInterface notif = new NotificationInterface(getApplicationContext(), TaskListFragment.class, R.drawable.ic_launcher, "Mais um Titulo Teste", "Um texto qualquer, só clica aqui.");
 
-                try {
+        while (temItemNaLista(context)) synchronized (this) {
 
-                    Self.update();
+            try {
 
-                    ArrayList<Item> lista = getEach();
+                Self.update();
 
-                    for (Item i : lista) {
-                        if (calculaDistancia(Self.getLat(), Self.getLng(), i.lat, i.lng) < valor) {
-                            postNotificantion(i);
-                        }
+                ArrayList<Item> lista = getEach();
 
-                        if (dataHoje == i.data()) {
-                            postNotification(i);
-                        }
+                for (Item i : lista) {
+                    if (calculaDistancia(Self.getLat(), Self.getLng(), i.lat, i.lng) < valor) {
+
+                        notif.setModel(getApplicationContext(), TaskListFragment.class, R.drawable.ic_launcher, i.title, i.text);
+                        notif.setNotifID(i.id);
+                        notif.postNotification();
+
+
                     }
 
                     //fará uma pausa de 10 minutos antes de realizar otura verificação na lista
-                    long pauseTime = System.currentTimeMillis() + 600*1000;
+                    long pauseTime = System.currentTimeMillis() + 600 * 1000;
                     wait(pauseTime - System.currentTimeMillis());
 
-                } catch (Exception e) {
-
                 }
-
-
-
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
+            } catch (Exception e) {
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
             }
+
         }
 
     }
@@ -103,8 +107,8 @@ public class MemorService extends IntentService {
     protected boolean temItemNaLista(Context context) {
         sCursor = db.loadTasks();
 
-        if (sCursor != null){
-            return  true;
+        if (sCursor != null) {
+            return true;
         } else {
             return false;
         }
@@ -113,7 +117,7 @@ public class MemorService extends IntentService {
     protected static class Self {
         static LatLng myLocation;
 
-        public static void update(){
+        public static void update() {
             MapsActivity maps = new MapsActivity();
             myLocation = maps.getMyLocation();
         }
@@ -129,16 +133,16 @@ public class MemorService extends IntentService {
 
     protected static class Item {
         int id;
-        double lat,lng;
+        double lat, lng;
         String title, text;
 
     }
 
     private ArrayList<Item> getEach() {
         ArrayList<Item> mArrayList = new ArrayList<>();
-        for(sCursor.moveToFirst(); !sCursor.isAfterLast(); sCursor.moveToNext()) {
+        for (sCursor.moveToFirst(); !sCursor.isAfterLast(); sCursor.moveToNext()) {
             // The Cursor is now set to the right position
-            Item i = new Item;
+            Item i = new Item();
             i.id = sCursor.getColumnIndex("_id");
             mArrayList.add(i);
         }

@@ -59,7 +59,15 @@ public class NotificationInterface {
         // ID da notificação, para atualiza-la depois
         int notifID = 0;
 
-        // Declaração do gerenciado de notificação
+    public int getNotifID() {
+        return notifID;
+    }
+
+    public void setNotifID(int notifID) {
+        this.notifID = notifID;
+    }
+
+    // Declaração do gerenciado de notificação
         NotificationManager manager;
 
         // Configuração do cannal de notificação
@@ -75,7 +83,7 @@ public class NotificationInterface {
         // Inicialização do modelo de notificação
         Notification.Builder model;
 
-        public NotificationInterface(Context context, Class clickResult, String title, String text) {
+        public NotificationInterface(Context context, Class clickResult, int ic_launcher, String title, String text) {
             // atribuição ao serviço de notificação do sistema
             manager = (NotificationManager) context.getSystemService(NOTIFICATION_SERVICE);
 
@@ -114,7 +122,7 @@ public class NotificationInterface {
             this.icon = icon;
         }
 
-        public void setModel(Context context, Class clickResult, String title, String text) {
+        public void setModel(Context context, Class clickResult, int ic_launcher, String title, String text) {
 
             this.clickResult = clickResult;
             resultIntent = new Intent(context,this.clickResult);
