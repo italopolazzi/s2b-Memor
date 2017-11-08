@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        tools:context="com.dev.mendes.android_mytasks.fragment.ModTaskFragment">
+
+        <LinearLayout
+            android:id="@+id/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal">
+
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/material_small"
+                android:layout_marginTop="@dimen/toolbar_margin"
+                android:layout_weight="0.03"
+                android:backgroundTint="@color/colorWhite"
+                android:ems="10"
+                android:hint="@string/new_task"
+                android:inputType="textCapSentences"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorWhite"
+                android:textSize="24sp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_cardPlace"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/material_small"
+            android:layout_marginTop="180dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal"
+            android:gravity="left"
+            >
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="@dimen/material_small"
+                android:layout_marginTop="@dimen/material_big"
+                android:src="@drawable/ic_local"
+                android:tint="@color/colorAccent"
+                android:layout_weight="2"
+                />
+
+            <EditText
+                android:id="@+id/et_place"
+                android:layout_width="0dp"
+                android:layout_weight="8"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:layout_marginLeft="@dimen/material_normal"
+                android:hint="@string/task_place"
+                android:textColor="@color/colorText" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                >
+
+                <ImageView
+                    android:id="@+id/btn_selLocal"
+                    android:layout_width="@dimen/toolbar_margin"
+                    android:layout_height="@dimen/toolbar_margin"
+                    android:src="@drawable/ic_local"
+                    android:tint="@color/colorWhite"
+                    android:paddingTop="@dimen/material_normal"
+                    android:paddingBottom="@dimen/material_normal"
+                    android:background="@color/colorSoft"
+
+                    android:layout_alignParentRight="true"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_cardDate"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/material_small"
+            android:layout_marginTop="240dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="20dp"
+                android:layout_marginLeft="@dimen/material_small"
+                android:layout_marginTop="@dimen/material_big"
+                android:src="@drawable/ic_calendar"
+                android:tint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/et_date"
+                android:layout_width="0dp"
+                android:layout_weight="12"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:layout_marginLeft="@dimen/material_small"
+                android:hint="@string/task_date"
+                android:focusable="false"
+                android:textColor="@color/colorText" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_cardNote"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_marginLeft="@dimen/material_small"
+            android:layout_marginTop="300dp"
+            android:background="@color/colorWhite"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="20dp"
+                android:layout_marginLeft="@dimen/material_small"
+                android:layout_marginTop="@dimen/material_big"
+                android:src="@drawable/ic_pencil"
+                android:tint="@color/colorAccent" />
+
+            <EditText
+                android:id="@+id/et_note"
+                android:layout_weight="12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                android:layout_marginLeft="@dimen/material_small"
+                android:hint="@string/task_note"
+                android:textColor="@color/colorText" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btn_persistit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/colorAccent"
+                android:text="@string/btn_save"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="toolbar_margin">64dp</dimen>
+    <dimen name="material_small">4dp</dimen>
+    <dimen name="material_normal">8dp</dimen>
+    <dimen name="material_big">16dp</dimen>
+    <dimen name="material_very_big">24dp</dimen>
+
+</resources>
