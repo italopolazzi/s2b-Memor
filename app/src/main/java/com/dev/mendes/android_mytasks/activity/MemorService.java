@@ -24,7 +24,8 @@ import com.google.android.gms.maps.model.LatLng;
 
 public class MemorService extends IntentService {
 
-    private double valor = 1000 * 1000; //em metros
+    private int raio = 1000;
+    private double valor = raio * 1000; //em metros
     private Cursor sCursor;
     private DataBaseControl db;
 
@@ -55,7 +56,7 @@ public class MemorService extends IntentService {
                 ArrayList<Item> lista = getEach();
 
                 for (Item i : lista) {
-                    if (calculaDistancia(Self.getLat(), Self.getLng(), i.lat, i.lng) < valor) {
+                    if (calculaDistancia(Self.getLat(), Self.getLng(), i.lat, i.lng) < valor && i.check != 0) {
 
                         notif.setModel(getApplicationContext(), TaskListFragment.class, R.drawable.ic_launcher, i.title, i.text);
                         notif.setNotifID(i.id);
@@ -132,9 +133,10 @@ public class MemorService extends IntentService {
     }
 
     protected static class Item {
-        int id;
+        int id, check;
         double lat, lng;
         String title, text;
+        String taskCordenates;
 
     }
 
@@ -144,10 +146,22 @@ public class MemorService extends IntentService {
             // The Cursor is now set to the right position
             Item i = new Item();
             i.id = sCursor.getColumnIndex("_id");
+            i.check = sCursor.getColumnIndex("CHECK");
+            i.title = sCursor.getString(sCursor.getColumnIndex("NOME"));
+            i.text = sCursor.getString(sCursor.getColumnIndex("NOTE"));
+            i.taskCordenates = sCursor.getString(sCursor.getColumnIndex("COORDINATES"));
             mArrayList.add(i);
         }
 
         return mArrayList;
+    }
+
+    public int getRaio() {
+        return raio;
+    }
+
+    public void setRaio(int raio) {
+        this.raio = raio;
     }
 
 }
