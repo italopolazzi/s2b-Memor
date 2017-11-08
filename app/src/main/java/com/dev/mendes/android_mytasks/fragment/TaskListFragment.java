@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 
 import com.dev.mendes.android_mytasks.R;
 import com.dev.mendes.android_mytasks.activity.ModTaskActivity;
+import com.dev.mendes.android_mytasks.activity.TaskListActivity;
 import com.dev.mendes.android_mytasks.adapter.TaskListAdapter;
 import com.dev.mendes.android_mytasks.dataBase.DataBaseControl;
 import com.dev.mendes.android_mytasks.dataBase.Task;
@@ -25,7 +26,6 @@ public class TaskListFragment extends Fragment implements TaskListAdapter.OnTask
     private LinearLayout layoutEmpty;
 
     private  String titulo, texto;
-    private  NotificationInterface notif;
 
     public TaskListFragment() {
         // Required empty public constructor
@@ -35,10 +35,7 @@ public class TaskListFragment extends Fragment implements TaskListAdapter.OnTask
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
-        // Precisa dos parametros Context e a Classe para redirecionamento
-        //notif = new NotificationInterface(  , , R.mipmap.ic_launcher, titulo, texto );
+        
 
         // Infla o layout correto
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);

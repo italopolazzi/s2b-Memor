@@ -18,6 +18,8 @@ public class DataBaseControl {
         banco = new DataBaseTask(context);
     }
 
+
+
     public String addTask(String taskName, String taskDate, String taskPlace, String taskCoordinates, String taskNote) {
         ContentValues valores;
         long resultado;

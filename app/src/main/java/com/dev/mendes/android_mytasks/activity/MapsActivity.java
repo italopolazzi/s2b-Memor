@@ -41,8 +41,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     TextView textLastLocation;
 
     private GoogleMap mMap;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
+    static GoogleApiClient mGoogleApiClient;
+    static Location mLastLocation;
     FloatingActionButton fabMeuLocal, fabConcluir;
     MarkerOptions thisMarker;
     Marker myMarker;
@@ -102,7 +102,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //ref: Requesting Permissions at Run Time
     //http://developer.android.com/training/permissions/requesting.html
     //------------------------------------------------------------------------------
-    private LatLng getMyLocation() {
+    public LatLng getMyLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
