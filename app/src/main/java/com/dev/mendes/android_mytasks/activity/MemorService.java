@@ -42,7 +42,7 @@ public class MemorService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
 
-        while (temItemNaLista()) {
+        while (temItemNaLista(context)) {
             synchronized (this) {
 
                 try {
