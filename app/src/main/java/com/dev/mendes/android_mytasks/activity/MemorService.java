@@ -66,7 +66,8 @@ public class MemorService extends IntentService {
                     }
 
                     //fará uma pausa de 10 minutos antes de realizar otura verificação na lista
-                    long pauseTime = System.currentTimeMillis() + 600 * 1000;
+                    int time = 10; // em segundos
+                    long pauseTime = System.currentTimeMillis() + time * 1000;
                     wait(pauseTime - System.currentTimeMillis());
 
                 }

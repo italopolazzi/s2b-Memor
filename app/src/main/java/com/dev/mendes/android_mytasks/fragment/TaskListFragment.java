@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.dev.mendes.android_mytasks.R;
+import com.dev.mendes.android_mytasks.activity.MemorService;
 import com.dev.mendes.android_mytasks.activity.ModTaskActivity;
 import com.dev.mendes.android_mytasks.activity.TaskListActivity;
 import com.dev.mendes.android_mytasks.adapter.TaskListAdapter;
@@ -35,7 +36,9 @@ public class TaskListFragment extends Fragment implements TaskListAdapter.OnTask
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        
+
+        // Iniciando MemorService
+        MemorService service = new MemorService("MemorService", getContext());
 
         // Infla o layout correto
         View view = inflater.inflate(R.layout.fragment_task_list, container, false);
