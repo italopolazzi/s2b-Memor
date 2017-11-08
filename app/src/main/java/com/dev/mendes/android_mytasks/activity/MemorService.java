@@ -136,7 +136,6 @@ public class MemorService extends IntentService {
         int id, check;
         double lat, lng;
         String title, text;
-        String taskCordenates;
 
     }
 
@@ -149,7 +148,9 @@ public class MemorService extends IntentService {
             i.check = sCursor.getColumnIndex("CHECK");
             i.title = sCursor.getString(sCursor.getColumnIndex("NOME"));
             i.text = sCursor.getString(sCursor.getColumnIndex("NOTE"));
-            i.taskCordenates = sCursor.getString(sCursor.getColumnIndex("COORDINATES"));
+            String taskCordenates[] = sCursor.getString(sCursor.getColumnIndex("COORDINATES")).split("|");
+            i.lat = Double.parseDouble(taskCordenates[0]);
+            i.lng = Double.parseDouble(taskCordenates[1]);
             mArrayList.add(i);
         }
 
